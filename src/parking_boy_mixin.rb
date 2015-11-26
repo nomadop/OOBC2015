@@ -16,12 +16,11 @@ module ParkingBoyMixin
   module InstanceMethods
     def initialize(*parking_lots)
       @parking_lots = parking_lots
-      @park_method = self.class.park_method
-      @park_attribute = self.class.park_attribute
     end
 
     def park(car)
-      @parking_lots.send(@park_method, &@park_attribute).park(car)
+      klass = self.class
+      @parking_lots.send(klass.park_method, &klass.park_attribute).park(car)
     rescue
       Ticket.none
     end

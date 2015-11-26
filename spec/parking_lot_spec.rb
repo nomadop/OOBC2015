@@ -16,7 +16,7 @@ describe 'Parking Lot' do
       end
 
       it 'should not get the car back when pick with wrong ticket' do
-        expect(@parking_lot.pick(Ticket.new)).not_to be(@car)
+        expect(@parking_lot.pick(Ticket.none)).not_to be(@car)
       end
 
       it 'should not get the car back when pick with right ticket twice' do

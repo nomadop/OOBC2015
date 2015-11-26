@@ -2,7 +2,7 @@ require 'securerandom'
 
 # Ticket
 class Ticket
-  attr_accessor :parking_lot_id, :token, :success
+  attr_reader :parking_lot_id, :token, :success
 
   class << self
     def none
@@ -10,7 +10,7 @@ class Ticket
     end
   end
 
-  def initialize(parking_lot_id = nil)
+  def initialize(parking_lot_id)
     @parking_lot_id = parking_lot_id
     if parking_lot_id
       @token = SecureRandom.hex(64)
