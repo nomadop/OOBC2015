@@ -11,3 +11,12 @@
 AllCops:
   Exclude:
     - 'spec/spec_helper.rb'
+
+Style/IfUnlessModifier:
+  MaxLineLength: 120
+
+Metrics/LineLength:
+  Max: 120
+
+Style/WhileUntilModifier:
+  MaxLineLength: 120

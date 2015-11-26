@@ -3,7 +3,7 @@ require_relative './ticket'
 
 # Parking Lot
 class ParkingLot
-  attr_accessor :id, :free_space
+  attr_reader :id, :free_space
 
   def initialize(free_space = Float::INFINITY)
     @free_space = free_space

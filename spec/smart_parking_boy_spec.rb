@@ -34,7 +34,7 @@ describe 'Smart Parking Boy' do
 
   describe 'manage 2 parking lots' do
     it 'should park the car to parking lot having more free space when two parking lots have different free space' do
-      less_free_space_lot = ParkingLot.new(2).tap{ |lot| lot.park('a exist car') }
+      less_free_space_lot = ParkingLot.new(2).tap { |lot| lot.park('a exist car') }
       more_free_space_lot = ParkingLot.new(2)
       smart_parking_boy = SmartParkingBoy.new(less_free_space_lot, more_free_space_lot)
       car = 'this is a car'

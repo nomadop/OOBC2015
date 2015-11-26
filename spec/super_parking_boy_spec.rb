@@ -33,7 +33,7 @@ describe 'Super Parking Boy' do
   end
 
   describe 'manage 2 parking lots' do
-    it 'should park the car to parking lot having more free space rate when two parking lots have different free space rate' do
+    it 'should park the car to parking lot having more free space rate' do
       less_free_space_rate_lot = ParkingLot.new(2).tap { |lot| lot.park('a exist car') }
       more_free_space_rate_lot = ParkingLot.new(3).tap { |lot| lot.park('a exist car') }
       super_parking_boy = SuperParkingBoy.new(less_free_space_rate_lot, more_free_space_rate_lot)
