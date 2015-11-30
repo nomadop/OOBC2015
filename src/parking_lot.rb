@@ -1,19 +1,17 @@
-require 'securerandom'
 require_relative './ticket'
 
 # Parking Lot
 class ParkingLot
-  attr_reader :id, :free_space
+  attr_reader :free_space
 
   def initialize(free_space = Float::INFINITY)
     @free_space = free_space
     @lots = {}
-    @id = SecureRandom.uuid
   end
 
   def park(car)
     if available?
-      Ticket.new(@id).tap do |ticket|
+      Ticket.new.tap do |ticket|
         @free_space -= 1
         @lots[ticket.token] = car
       end
@@ -25,6 +23,10 @@ class ParkingLot
   def pick(ticket)
     @free_space += 1
     @lots.delete(ticket.token)
+  end
+
+  def contain?(ticket)
+    @lots.keys.include?(ticket.token)
   end
 
   def available?

@@ -1,7 +1,7 @@
 require_relative './ticket'
 
-# Parking Boy Mixin
-module ParkingBoyMixin
+# Parking Man
+module ParkingMan
   # Class Methods
   module ClassMethods
     attr_reader :park_method, :park_attribute
@@ -14,20 +14,28 @@ module ParkingBoyMixin
 
   # Instance Methods
   module InstanceMethods
-    def initialize(*parking_lots)
-      @parking_lots = parking_lots
+    def initialize(*containers)
+      @containers = containers
     end
 
     def park(car)
       klass = self.class
-      @parking_lots.send(klass.park_method, &klass.park_attribute).park(car)
+      @containers.send(klass.park_method, &klass.park_attribute).park(car)
     rescue
       Ticket.none
     end
 
     def pick(ticket)
-      parking_lot = @parking_lots.find { |p| p.id == ticket.parking_lot_id }
+      parking_lot = @containers.find { |lot| lot.contain?(ticket) }
       parking_lot.pick(ticket) if parking_lot
+    end
+
+    def contain?(ticket)
+      @containers.any? { |lot| lot.contain?(ticket) }
+    end
+
+    def available?
+      @containers.any?(&:available?)
     end
   end
 

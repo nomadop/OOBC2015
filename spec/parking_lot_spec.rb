@@ -1,6 +1,5 @@
 require 'rspec'
 require_relative '../src/parking_lot'
-require_relative '../src/ticket'
 
 describe 'Parking Lot' do
   describe 'with infinity capacity' do
@@ -63,6 +62,22 @@ describe 'Parking Lot' do
       ticket = @parking_lot.park('this is a car')
 
       expect(ticket.success).to be(false)
+    end
+  end
+
+  describe 'let' do
+    let(:parking_lot) { ParkingLot.new(1) }
+
+    it 'should successfully park' do
+      ticket = parking_lot.park('this is a car')
+
+      expect(ticket.success).to be(true)
+    end
+
+    it 'should successfully park' do
+      ticket = parking_lot.park('this is a car')
+
+      expect(ticket.success).to be(true)
     end
   end
 end

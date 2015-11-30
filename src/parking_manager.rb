@@ -1,7 +1,7 @@
 require_relative './parking_man'
 
-# Parking Boy
-class ParkingBoy
+# Parking Manager
+class ParkingManager
   include ParkingMan
   park_to :find, :available?
 end
