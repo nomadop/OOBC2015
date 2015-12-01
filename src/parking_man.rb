@@ -6,9 +6,9 @@ module ParkingMan
   module ClassMethods
     attr_reader :park_method, :park_attribute
 
-    def park_to(method, argument)
+    def park_to(method, attribute)
       @park_method = method
-      @park_attribute = argument
+      @park_attribute = attribute
     end
   end
 
@@ -21,17 +21,17 @@ module ParkingMan
     def park(car)
       klass = self.class
       @containers.send(klass.park_method, &klass.park_attribute).park(car)
-    rescue
+    rescue NoMethodError
       Ticket.none
     end
 
     def pick(ticket)
-      parking_lot = @containers.find { |lot| lot.contain?(ticket) }
-      parking_lot.pick(ticket) if parking_lot
+      container = @containers.find { |c| c.contain?(ticket) }
+      container.pick(ticket) if container
     end
 
     def contain?(ticket)
-      @containers.any? { |lot| lot.contain?(ticket) }
+      @containers.any? { |c| c.contain?(ticket) }
     end
 
     def available?
