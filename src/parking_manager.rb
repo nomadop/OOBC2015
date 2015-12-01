@@ -3,5 +3,6 @@ require_relative './parking_man'
 # Parking Manager
 class ParkingManager
   include ParkingMan
-  park_to :find, :available?
+  park_strategy :find, :available?
+  acceptance_containers 'ParkingBoy', 'SmartParkingBoy', 'SuperParkingBoy'
 end
