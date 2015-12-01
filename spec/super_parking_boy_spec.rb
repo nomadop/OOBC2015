@@ -34,8 +34,8 @@ describe 'Super Parking Boy' do
 
   describe 'manage 2 parking lots' do
     it 'should park the car to parking lot having more free space rate' do
-      less_free_space_rate_lot = ParkingLot.new(2).tap { |lot| lot.park('a exist car') }
-      more_free_space_rate_lot = ParkingLot.new(3).tap { |lot| lot.park('a exist car') }
+      less_free_space_rate_lot = ParkingLot.new(3).with_2_cars
+      more_free_space_rate_lot = ParkingLot.new(3).with_1_car
       super_parking_boy = SuperParkingBoy.new(less_free_space_rate_lot, more_free_space_rate_lot)
       car = 'this is a car'
 
@@ -45,10 +45,8 @@ describe 'Super Parking Boy' do
     end
 
     it 'should park the car successfully when two parking lots have same free space rate' do
-      parking_lot = ParkingLot.new(2).tap { |lot| lot.park('a exist car') }
-      another_parking_lot = ParkingLot.new(4).tap do |lot|
-        2.times { |i| lot.park("exist car #{i}") }
-      end
+      parking_lot = ParkingLot.new(2).with_1_car
+      another_parking_lot = ParkingLot.new(4).with_2_cars
       super_parking_boy = SuperParkingBoy.new(parking_lot, another_parking_lot)
       car = 'this is a car'
 
