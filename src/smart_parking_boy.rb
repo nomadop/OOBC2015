@@ -4,4 +4,5 @@ require_relative './parking_man'
 class SmartParkingBoy
   include ParkingMan
   park_strategy :max_by, :free_space
+  define_capital :B
 end

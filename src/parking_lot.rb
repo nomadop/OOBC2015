@@ -1,7 +1,11 @@
 require_relative './ticket'
+require_relative './reportable'
 
 # Parking Lot
 class ParkingLot
+  include Reportable
+  define_capital :P
+
   attr_reader :free_space
 
   def initialize(free_space = Float::INFINITY)
@@ -37,9 +41,11 @@ class ParkingLot
     free_space * 1.0 / capacity
   end
 
-  private
-
   def capacity
-    @lots.size + @free_space
+    parked_count + @free_space
+  end
+
+  def parked_count
+    @lots.size
   end
 end

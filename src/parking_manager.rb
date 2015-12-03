@@ -5,4 +5,5 @@ class ParkingManager
   include ParkingMan
   park_strategy :find, :available?
   acceptance_containers 'ParkingBoy', 'SmartParkingBoy', 'SuperParkingBoy'
+  define_capital :M
 end

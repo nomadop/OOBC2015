@@ -1,10 +1,11 @@
 require_relative './ticket'
+require_relative './reportable'
 
 # Parking Man
 module ParkingMan
   # Class Methods
   module ClassMethods
-    attr_reader :park_method, :park_attribute, :acceptance_container_types
+    attr_reader :park_method, :park_attribute, :acceptance_container_types, :capital
 
     def park_strategy(method, attribute)
       @park_method = method
@@ -13,6 +14,10 @@ module ParkingMan
 
     def acceptance_containers(*klasses)
       @acceptance_container_types = klasses << 'ParkingLot'
+    end
+
+    def define_capital(capital)
+      @capital = capital
     end
   end
 
@@ -46,6 +51,14 @@ module ParkingMan
       @containers.any?(&:available?)
     end
 
+    def parked_count
+      @containers.map(&:parked_count).reduce(:+)
+    end
+
+    def capacity
+      @containers.map(&:capacity).reduce(:+)
+    end
+
     private
 
     def klass
@@ -56,6 +69,7 @@ module ParkingMan
   def self.included(receiver)
     receiver.extend ClassMethods
     receiver.send :include, InstanceMethods
+    receiver.send :include, Reportable
     receiver.send :acceptance_containers
   end
 end

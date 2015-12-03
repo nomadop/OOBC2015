@@ -4,4 +4,5 @@ require_relative './parking_man'
 class ParkingBoy
   include ParkingMan
   park_strategy :find, :available?
+  define_capital :B
 end
